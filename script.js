@@ -257,7 +257,7 @@ const folderData = {
     projects: [
       {
         name: "QUIZ 1",
-        desc: "Online assessment / perfect score of 20/20 on Cloud Computing.",
+        desc: "Online assessment / perfect score of 20/20 on IT fundamentals.",
         img: "https://drive.google.com/thumbnail?id=1s3DTeDG95bFvjOkBrdXYLhXecp-dEcwD&sz=w1920",
         tag: "Online Quiz",
         lightbox: true,
@@ -281,7 +281,7 @@ const folderData = {
   },
   projects: {
     name: "Projects",
-    files: 4,
+    files: 5,
     projects: [
       {
         name: "BLOOMING INTERACTIVE FLOWER",
@@ -312,6 +312,14 @@ const folderData = {
         live: true,
         link: "https://calcunieli.vercel.app/",
       },
+      {
+        name: "POMODORO",
+        desc: "Web app / focus timer with session tracking, streak counter, and break management.",
+        img: "https://drive.google.com/thumbnail?id=1AF634MPS43E_RIQ_67bzOJtfeOxr_1_F&sz=w1000",
+        tag: "Web App",
+        live: true,
+        link: "https://arrilrj.github.io/pomodoro/",
+      },
     ],
   },
 };
@@ -334,7 +342,6 @@ $$(".folder-item").forEach((item) => {
   );
 
   item.addEventListener("click", () => {
-    /* REMOVED: the badge div is gone now */
     let html = `<div class="modal-header"><div><div class="modal-folder-name">${data.name}</div><div class="modal-meta">Folder 0${Object.keys(folderData).indexOf(folderKey) + 1} — BSIT 3B</div></div></div>`;
 
     if (data.projects.length > 0) {
