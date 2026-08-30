@@ -281,7 +281,7 @@ const folderData = {
   },
   projects: {
     name: "Projects",
-    files: 5,
+    files: 6,
     projects: [
       {
         name: "BLOOMING INTERACTIVE FLOWER",
@@ -319,6 +319,14 @@ const folderData = {
         tag: "Web App",
         live: true,
         link: "https://arrilrj.github.io/pomodoro/",
+      },
+      {
+        name: "TTPD STORYTELLING",
+        desc: "Web project / interactive storytelling experience with dynamic visuals and narrative flow.",
+        img: "https://drive.google.com/thumbnail?id=1CN1qSjIygaJ4k6Y_JteGwjJQPvkhR0ZC&sz=w1000",
+        tag: "Web App",
+        live: true,
+        link: "https://arrilrj.github.io/TTPD-storytelling/",
       },
     ],
   },
