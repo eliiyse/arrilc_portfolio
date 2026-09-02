@@ -1,504 +1,267 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arril Ricajane O. Carlos — Portfolio</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="loader-overlay" id="loaderOverlay">
-      <div class="loader-grid">
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-        <div class="loader-grid-line"></div>
-      </div>
-      <div class="loader-line-top" id="loaderLineTop"></div>
-      <div class="loader-line-bottom" id="loaderLineBottom"></div>
-      <div class="loader-corner loader-corner-tl" id="cornerTL">BSIT 3B</div>
-      <div class="loader-corner loader-corner-tr" id="cornerTR">2026</div>
-      <div class="loader-corner loader-corner-bl" id="cornerBL">PCU</div>
-      <div class="loader-corner loader-corner-br" id="cornerBR">Portfolio</div>
-      <div class="loader-center">
-        <div class="loader-title" id="loaderTitle">
-          <span class="loader-char">C</span><span class="loader-char">A</span
-          ><span class="loader-char">R</span><span class="loader-char">L</span
-          ><span class="loader-char">O</span><span class="loader-char">S</span>
-        </div>
-        <div class="loader-sub" id="loaderSub">
-          Arril Ricajane O. Carlos — Information Technology
-        </div>
-      </div>
-      <div class="loader-progress" id="loaderProgress"></div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arril Ricajane O. Carlos — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="loader-overlay" id="loaderOverlay">
+  <div class="loader-grid"><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div><div class="loader-grid-line"></div></div>
+  <div class="loader-line-top" id="loaderLineTop"></div>
+  <div class="loader-line-bottom" id="loaderLineBottom"></div>
+  <div class="loader-corner loader-corner-tl" id="cornerTL">BSIT 3B</div>
+  <div class="loader-corner loader-corner-tr" id="cornerTR">2026</div>
+  <div class="loader-corner loader-corner-bl" id="cornerBL">PCU</div>
+  <div class="loader-corner loader-corner-br" id="cornerBR">Portfolio</div>
+  <div class="loader-center">
+    <div class="loader-title" id="loaderTitle">
+      <span class="loader-char">C</span><span class="loader-char">A</span><span class="loader-char">R</span><span class="loader-char">L</span><span class="loader-char">O</span><span class="loader-char">S</span>
     </div>
+    <div class="loader-sub" id="loaderSub">Arril Ricajane O. Carlos — Information Technology</div>
+  </div>
+  <div class="loader-progress" id="loaderProgress"></div>
+</div>
 
-    <div class="main-content" id="mainContent">
-      <div class="scroll-progress" id="scrollProgress"></div>
-      <div class="cursor" id="cursor"></div>
-      <div class="cursor-trail" id="cursorTrail"></div>
-      <div class="grid-bg"></div>
-      <div class="floating-shape floating-shape-1"></div>
-      <div class="floating-shape floating-shape-2"></div>
-      <div class="floating-shape floating-shape-3"></div>
-      <div class="floating-shape floating-shape-4"></div>
+<div class="main-content" id="mainContent">
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+  <div class="grid-bg"></div>
+  <div class="floating-shape floating-shape-1"></div>
+  <div class="floating-shape floating-shape-2"></div>
+  <div class="floating-shape floating-shape-3"></div>
+  <div class="floating-shape floating-shape-4"></div>
 
-      <nav id="mainNav">
-        <div class="nav-left">
-          <a href="#" class="nav-name">A.R. Carlos</a>
-        </div>
-        <div class="nav-center">
-          <a href="#about" class="nav-link active" data-hover data-sound="hover"
-            >ABOUT</a
-          >
-          <a href="#archive" class="nav-link" data-hover data-sound="hover"
-            >ARCHIVE</a
-          >
-          <a
-            href="#contactSection"
-            class="nav-link"
-            data-hover
-            data-sound="hover"
-            >CONTACT</a
-          >
-        </div>
-        <div class="nav-right">
-          <span class="nav-clock" id="clock">--:--:--</span>
-          <button
-            class="invert-btn"
-            id="invertBtn"
-            data-hover
-            data-sound="click"
-          >
-            Invert
-          </button>
-          <button
-            class="sound-toggle"
-            id="soundToggle"
-            data-hover
-            title="Toggle sound"
-          >
-            <i data-lucide="volume-2" class="icon-unmuted"></i>
-            <i data-lucide="volume-x" class="icon-muted"></i>
-          </button>
-        </div>
-      </nav>
-
-      <section class="hero" id="about">
-        <div class="hero-decor-circle"></div>
-        <div class="hero-decor-rect"></div>
-        <div class="hero-inner">
-          <div class="hero-text">
-            <div class="hero-label">
-              <span class="hero-label-dot"></span>Personal Portfolio
-            </div>
-            <h1 class="hero-name">
-              <span class="line"><span>Arril Ricajane</span></span>
-              <span class="line"
-                ><span>O. <span class="highlight">Carlos</span></span></span
-              >
-            </h1>
-            <div class="hero-course">
-              <strong>Course:</strong> Information Technology<br />
-              <strong>Section:</strong> BSIT 3B<br />
-              <strong>Year:</strong> 3rd Year, 1st Semester
-            </div>
-            <div class="hero-tags">
-              <span class="hero-tag" data-hover data-sound="hover"
-                ><span>Portfolio</span></span
-              >
-              <span class="hero-tag" data-hover data-sound="hover"
-                ><span>BSIT 3B</span></span
-              >
-              <span class="hero-tag" data-hover data-sound="hover"
-                ><span>IT</span></span
-              >
-            </div>
-          </div>
-          <div class="hero-photo" data-hover>
-            <img
-              src="https://drive.google.com/thumbnail?id=1O1z-exCgLGzT8h7O0XpVd_lQxMUSkSHX&sz=w1000"
-              alt="Arril Ricajane O. Carlos"
-            />
-            <div class="hero-photo-frame"></div>
-          </div>
-        </div>
-        <div class="scroll-indicator">
-          <span class="scroll-indicator-text">Scroll</span>
-          <div class="scroll-indicator-line"></div>
-        </div>
-      </section>
-
-      <div class="marquee">
-        <div class="marquee-track">
-          <span class="marquee-item">TouchDesigner</span>
-          <span class="marquee-item">Interactive Media</span>
-          <span class="marquee-item">Finger Tracking</span>
-          <span class="marquee-item">Particle Systems</span>
-          <span class="marquee-item">Web Development</span>
-          <span class="marquee-item">BSIT 3B</span>
-          <span class="marquee-item">Arril Ricajane O. Carlos</span>
-          <span class="marquee-item">Portfolio Compilation</span>
-          <span class="marquee-item">TouchDesigner</span>
-          <span class="marquee-item">Interactive Media</span>
-          <span class="marquee-item">Finger Tracking</span>
-          <span class="marquee-item">Particle Systems</span>
-          <span class="marquee-item">Web Development</span>
-          <span class="marquee-item">BSIT 3B</span>
-          <span class="marquee-item">Arril Ricajane O. Carlos</span>
-          <span class="marquee-item">Portfolio Compilation</span>
-        </div>
-      </div>
-
-      <section class="gallery">
-        <div class="gallery-header reveal">
-          <h2 class="gallery-title">Gallery</h2>
-          <span class="gallery-count">06 photos</span>
-        </div>
-        <div class="gallery-grid">
-          <div
-            class="gallery-item reveal reveal-delay-1"
-            data-hover
-            data-sound="hover"
-            data-gallery="0"
-          >
-            <img
-              src="https://drive.google.com/thumbnail?id=1H8Eb1NP1-Y3GDWDwX_gDvJLT_tm7OqdY&sz=w1920"
-              alt="Night street"
-            />
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-label">Night street</span>
-            </div>
-            <div class="gallery-item-zoom" data-hover>
-              <i data-lucide="maximize-2"></i>
-            </div>
-          </div>
-          <div
-            class="gallery-item reveal reveal-delay-2"
-            data-hover
-            data-sound="hover"
-            data-gallery="1"
-          >
-            <img
-              src="https://drive.google.com/thumbnail?id=1KhKsJtC0xEJ-QsLHA39KyCcPwRgPtg_2&sz=w1920"
-              alt="Collect & Gifts"
-            />
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-label">Collect & Gifts</span>
-            </div>
-            <div class="gallery-item-zoom" data-hover>
-              <i data-lucide="maximize-2"></i>
-            </div>
-          </div>
-          <div
-            class="gallery-item reveal reveal-delay-3"
-            data-hover
-            data-sound="hover"
-            data-gallery="2"
-          >
-            <img
-              src="https://drive.google.com/thumbnail?id=1s_JS5J9si-z98gMZLV6BPjiDOwfZbuqr&sz=w1920"
-              alt="Phone booth"
-            />
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-label">Phone booth</span>
-            </div>
-            <div class="gallery-item-zoom" data-hover>
-              <i data-lucide="maximize-2"></i>
-            </div>
-          </div>
-          <div
-            class="gallery-item reveal reveal-delay-4"
-            data-hover
-            data-sound="hover"
-            data-gallery="3"
-          >
-            <img
-              src="https://drive.google.com/thumbnail?id=18TG1KRFFM8dE0TURqsn8yXOHrkb3ZWig&sz=w1920"
-              alt="Bamboo walk"
-            />
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-label">Bamboo walk</span>
-            </div>
-            <div class="gallery-item-zoom" data-hover>
-              <i data-lucide="maximize-2"></i>
-            </div>
-          </div>
-          <div
-            class="gallery-item reveal reveal-delay-4"
-            data-hover
-            data-sound="hover"
-            data-gallery="4"
-          >
-            <img
-              src="https://drive.google.com/thumbnail?id=1WN3u1qhlepIAy_7f30XhJvd08kXWvF3s&sz=w1920"
-              alt="Picnic Time"
-            />
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-label">Picnic Time</span>
-            </div>
-            <div class="gallery-item-zoom" data-hover>
-              <i data-lucide="maximize-2"></i>
-            </div>
-          </div>
-          <div
-            class="gallery-item reveal reveal-delay-4"
-            data-hover
-            data-sound="hover"
-            data-gallery="5"
-          >
-            <img
-              src="https://drive.google.com/thumbnail?id=1R15vnV28WG7scOMKTyaDqvqNVyLr0QaR&sz=w1920"
-              alt="Night Hangout"
-            />
-            <div class="gallery-item-overlay">
-              <span class="gallery-item-label">Night Hangout</span>
-            </div>
-            <div class="gallery-item-zoom" data-hover>
-              <i data-lucide="maximize-2"></i>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="portfolio" id="archive">
-        <div class="section-header reveal">
-          <h2 class="section-title">Portfolio Folders</h2>
-          <span class="section-count">04 folders</span>
-        </div>
-        <div class="folder-list">
-          <div
-            class="folder-item reveal reveal-delay-1"
-            data-folder="quiz"
-            data-hover
-            data-sound="hover"
-          >
-            <span class="folder-number">01</span>
-            <div class="folder-content">
-              <div class="folder-name" data-scramble>Quiz</div>
-              <div class="folder-desc">
-                Periodic quizzes, short assessments, and pop quizzes compiled
-                throughout the semester.
-              </div>
-            </div>
-            <div class="folder-right">
-              <span class="folder-status">1 file</span>
-              <div class="folder-arrow"><i data-lucide="arrow-right"></i></div>
-            </div>
-          </div>
-          <div
-            class="folder-item reveal reveal-delay-2"
-            data-folder="exams"
-            data-hover
-            data-sound="hover"
-          >
-            <span class="folder-number">02</span>
-            <div class="folder-content">
-              <div class="folder-name" data-scramble>Exams</div>
-              <div class="folder-desc">
-                Midterm and final examination papers, answer sheets, and review
-                materials.
-              </div>
-            </div>
-            <div class="folder-right">
-              <span class="folder-status">0 files</span>
-              <div class="folder-arrow"><i data-lucide="arrow-right"></i></div>
-            </div>
-          </div>
-          <div
-            class="folder-item reveal reveal-delay-3"
-            data-folder="laboratory"
-            data-hover
-            data-sound="hover"
-          >
-            <span class="folder-number">03</span>
-            <div class="folder-content">
-              <div class="folder-name" data-scramble>Laboratory</div>
-              <div class="folder-desc">
-                Hands-on lab activities, coding exercises, practical outputs,
-                and experiment reports.
-              </div>
-            </div>
-            <div class="folder-right">
-              <span class="folder-status">1 file</span>
-              <div class="folder-arrow"><i data-lucide="arrow-right"></i></div>
-            </div>
-          </div>
-          <div
-            class="folder-item reveal reveal-delay-4"
-            data-folder="projects"
-            data-hover
-            data-sound="hover"
-          >
-            <span class="folder-number">04</span>
-            <div class="folder-content">
-              <div class="folder-name" data-scramble>Projects</div>
-              <div class="folder-desc">
-                Major projects, group works, system developments, and final
-                deliverables.
-              </div>
-            </div>
-            <div class="folder-right">
-              <span class="folder-status">6 files</span>
-              <div class="folder-arrow"><i data-lucide="arrow-right"></i></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact reveal" id="contactSection">
-        <div class="contact-decor-1"></div>
-        <div class="contact-decor-2"></div>
-        <div class="contact-decor-3"></div>
-        <div class="contact-inner">
-          <div class="contact-icon-wrap" data-hover data-sound="hover">
-            <i data-lucide="mail"></i>
-          </div>
-          <h2 class="contact-heading">
-            For work, collabs &<br />everything else, reach me at
-          </h2>
-          <p class="contact-sub">
-            I'd love to hear from you. Whether it's a project idea,<br />a
-            question, or just a hello — my inbox is always open.
-          </p>
-          <div class="contact-emails">
-            <div class="contact-email-row">
-              <span class="contact-email-label">PCU Mail</span>
-              <span class="contact-email-divider"></span>
-              <a
-                href="mailto:arocarlos@pcu.edu.ph"
-                class="contact-email-link"
-                data-hover
-                data-sound="hover"
-                >arocarlos@pcu.edu.ph<span class="link-arrow"
-                  ><i data-lucide="arrow-up-right"></i></span
-              ></a>
-              <button
-                class="contact-copy-btn"
-                data-copy="arocarlos@pcu.edu.ph"
-                data-hover
-                data-sound="click"
-                title="Copy email"
-              >
-                <i data-lucide="copy"></i>
-              </button>
-            </div>
-            <div class="contact-email-row">
-              <span class="contact-email-label">Personal</span>
-              <span class="contact-email-divider"></span>
-              <a
-                href="mailto:arrilrj.carlos@gmail.com"
-                class="contact-email-link"
-                data-hover
-                data-sound="hover"
-                >arrilrj.carlos@gmail.com<span class="link-arrow"
-                  ><i data-lucide="arrow-up-right"></i></span
-              ></a>
-              <button
-                class="contact-copy-btn"
-                data-copy="arrilrj.carlos@gmail.com"
-                data-hover
-                data-sound="click"
-                title="Copy email"
-              >
-                <i data-lucide="copy"></i>
-              </button>
-            </div>
-          </div>
-          <div class="contact-socials">
-            <a
-              href="mailto:arocarlos@pcu.edu.ph"
-              class="contact-social-btn"
-              data-hover
-              data-sound="hover"
-              title="Email"
-              ><i data-lucide="mail"></i
-            ></a>
-            <a
-              href="mailto:arrilrj.carlos@gmail.com"
-              class="contact-social-btn"
-              data-hover
-              data-sound="hover"
-              title="Gmail"
-              ><i data-lucide="send"></i
-            ></a>
-            <a
-              href="https://calcunieli.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-social-btn"
-              data-hover
-              data-sound="hover"
-              title="Website"
-              ><i data-lucide="globe"></i
-            ></a>
-          </div>
-          <div class="contact-bottom-line">
-            Philippine Christian University - Dasmarinas — BSIT 3B
-          </div>
-        </div>
-      </section>
-
-      <div class="folder-preview" id="previewPanel">
-        <div class="preview-icon-box"><i data-lucide="folder"></i></div>
-        <div class="preview-label">Folder Preview</div>
-        <div class="preview-name" id="previewName">—</div>
-        <div class="preview-files" id="previewFiles">0 files compiled</div>
-      </div>
-
-      <div class="lightbox-overlay" id="lightboxOverlay">
-        <button class="lightbox-close" id="lightboxClose" data-hover>
-          <i data-lucide="x"></i>
-        </button>
-        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" data-hover>
-          <i data-lucide="chevron-left"></i>
-        </button>
-        <button class="lightbox-nav lightbox-next" id="lightboxNext" data-hover>
-          <i data-lucide="chevron-right"></i>
-        </button>
-        <div class="lightbox-img-wrap" id="lightboxImgWrap">
-          <img class="lightbox-img" id="lightboxImg" src="" alt="" />
-        </div>
-        <div class="lightbox-counter" id="lightboxCounter">01 / 06</div>
-      </div>
-
-      <div class="modal-overlay" id="modalOverlay">
-        <div class="modal" id="modalContent">
-          <button class="modal-close" id="modalClose" data-hover>
-            <i data-lucide="x"></i>
-          </button>
-          <div id="modalBody"></div>
-        </div>
-      </div>
-
-      <button class="back-to-top" id="backToTop" data-hover data-sound="click">
-        <i data-lucide="arrow-up"></i>
+  <nav id="mainNav">
+    <div class="nav-left">
+      <a href="#" class="nav-name">A.R. Carlos</a>
+    </div>
+    <div class="nav-center">
+      <a href="#about" class="nav-link active" data-hover data-sound="hover">ABOUT</a>
+      <a href="#archive" class="nav-link" data-hover data-sound="hover">ARCHIVE</a>
+      <a href="#contactSection" class="nav-link" data-hover data-sound="hover">CONTACT</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-clock" id="clock">--:--:--</span>
+      <button class="invert-btn" id="invertBtn" data-hover data-sound="click">Invert</button>
+      <button class="sound-toggle" id="soundToggle" data-hover title="Toggle sound">
+        <i data-lucide="volume-2" class="icon-unmuted"></i>
+        <i data-lucide="volume-x" class="icon-muted"></i>
       </button>
-
-      <footer>
-        <div class="footer-col">
-          © 2026 Arril Ricajane O. Carlos<br />
-          Philippine Christian University - Dasmarinas
-        </div>
-        <div class="footer-col right">
-          Crafted with care<br />
-          BSIT 3B — Portfolio Compilation
-        </div>
-      </footer>
     </div>
+  </nav>
 
-    <div class="toast" id="toast"></div>
+  <section class="hero" id="about">
+    <div class="hero-decor-circle"></div>
+    <div class="hero-decor-rect"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-label"><span class="hero-label-dot"></span>Personal Portfolio</div>
+        <h1 class="hero-name">
+          <span class="line"><span>Arril Ricajane</span></span>
+          <span class="line"><span>O. <span class="highlight">Carlos</span></span></span>
+        </h1>
+        <div class="hero-course">
+          <strong>Course:</strong> Information Technology<br>
+          <strong>Section:</strong> BSIT 3B<br>
+          <strong>Year:</strong> 3rd Year, 1st Semester
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag" data-hover data-sound="hover"><span>Portfolio</span></span>
+          <span class="hero-tag" data-hover data-sound="hover"><span>BSIT 3B</span></span>
+          <span class="hero-tag" data-hover data-sound="hover"><span>IT</span></span>
+        </div>
+      </div>
+      <div class="hero-photo" data-hover>
+        <img src="https://drive.google.com/thumbnail?id=1O1z-exCgLGzT8h7O0XpVd_lQxMUSkSHX&sz=w1000" alt="Arril Ricajane O. Carlos">
+        <div class="hero-photo-frame"></div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-indicator-text">Scroll</span>
+      <div class="scroll-indicator-line"></div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
-  </body>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">TouchDesigner</span>
+      <span class="marquee-item">Interactive Media</span>
+      <span class="marquee-item">Finger Tracking</span>
+      <span class="marquee-item">Particle Systems</span>
+      <span class="marquee-item">Web Development</span>
+      <span class="marquee-item">BSIT 3B</span>
+      <span class="marquee-item">Arril Ricajane O. Carlos</span>
+      <span class="marquee-item">Portfolio Compilation</span>
+      <span class="marquee-item">TouchDesigner</span>
+      <span class="marquee-item">Interactive Media</span>
+      <span class="marquee-item">Finger Tracking</span>
+      <span class="marquee-item">Particle Systems</span>
+      <span class="marquee-item">Web Development</span>
+      <span class="marquee-item">BSIT 3B</span>
+      <span class="marquee-item">Arril Ricajane O. Carlos</span>
+      <span class="marquee-item">Portfolio Compilation</span>
+    </div>
+  </div>
+
+  <section class="gallery">
+    <div class="gallery-header reveal">
+      <h2 class="gallery-title">Gallery</h2>
+      <span class="gallery-count">06 photos</span>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal reveal-delay-1" data-hover data-sound="hover" data-gallery="0">
+        <img src="https://drive.google.com/thumbnail?id=1H8Eb1NP1-Y3GDWDwX_gDvJLT_tm7OqdY&sz=w1920" alt="Night street">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Night street</span></div>
+        <div class="gallery-item-zoom" data-hover><i data-lucide="maximize-2"></i></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2" data-hover data-sound="hover" data-gallery="1">
+        <img src="https://drive.google.com/thumbnail?id=1KhKsJtC0xEJ-QsLHA39KyCcPwRgPtg_2&sz=w1920" alt="Collect & Gifts">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Collect & Gifts</span></div>
+        <div class="gallery-item-zoom" data-hover><i data-lucide="maximize-2"></i></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3" data-hover data-sound="hover" data-gallery="2">
+        <img src="https://drive.google.com/thumbnail?id=1s_JS5J9si-z98gMZLV6BPjiDOwfZbuqr&sz=w1920" alt="Phone booth">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Phone booth</span></div>
+        <div class="gallery-item-zoom" data-hover><i data-lucide="maximize-2"></i></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-4" data-hover data-sound="hover" data-gallery="3">
+        <img src="https://drive.google.com/thumbnail?id=18TG1KRFFM8dE0TURqsn8yXOHrkb3ZWig&sz=w1920" alt="Bamboo walk">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Bamboo walk</span></div>
+        <div class="gallery-item-zoom" data-hover><i data-lucide="maximize-2"></i></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-4" data-hover data-sound="hover" data-gallery="4">
+        <img src="https://drive.google.com/thumbnail?id=1WN3u1qhlepIAy_7f30XhJvd08kXWvF3s&sz=w1920" alt="Picnic Time">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Picnic Time</span></div>
+        <div class="gallery-item-zoom" data-hover><i data-lucide="maximize-2"></i></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-4" data-hover data-sound="hover" data-gallery="5">
+        <img src="https://drive.google.com/thumbnail?id=1R15vnV28WG7scOMKTyaDqvqNVyLr0QaR&sz=w1920" alt="Night Hangout">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Night Hangout</span></div>
+        <div class="gallery-item-zoom" data-hover><i data-lucide="maximize-2"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio" id="archive">
+    <div class="section-header reveal">
+      <h2 class="section-title">Portfolio Folders</h2>
+      <span class="section-count">04 folders</span>
+    </div>
+    <div class="folder-list">
+      <div class="folder-item reveal reveal-delay-1" data-folder="quiz" data-hover data-sound="hover">
+        <span class="folder-number">01</span>
+        <div class="folder-content">
+          <div class="folder-name" data-scramble>Quiz</div>
+          <div class="folder-desc">Periodic quizzes, short assessments, and pop quizzes compiled throughout the semester.</div>
+        </div>
+        <div class="folder-right"><span class="folder-status">1 file</span><div class="folder-arrow"><i data-lucide="arrow-right"></i></div></div>
+      </div>
+      <div class="folder-item reveal reveal-delay-2" data-folder="exams" data-hover data-sound="hover">
+        <span class="folder-number">02</span>
+        <div class="folder-content">
+          <div class="folder-name" data-scramble>Exams</div>
+          <div class="folder-desc">Midterm and final examination papers, answer sheets, and review materials.</div>
+        </div>
+        <div class="folder-right"><span class="folder-status">0 files</span><div class="folder-arrow"><i data-lucide="arrow-right"></i></div></div>
+      </div>
+      <div class="folder-item reveal reveal-delay-3" data-folder="laboratory" data-hover data-sound="hover">
+        <span class="folder-number">03</span>
+        <div class="folder-content">
+          <div class="folder-name" data-scramble>Laboratory</div>
+          <div class="folder-desc">Hands-on lab activities, coding exercises, practical outputs, and experiment reports.</div>
+        </div>
+        <div class="folder-right"><span class="folder-status">2 files</span><div class="folder-arrow"><i data-lucide="arrow-right"></i></div></div>
+      </div>
+      <div class="folder-item reveal reveal-delay-4" data-folder="projects" data-hover data-sound="hover">
+        <span class="folder-number">04</span>
+        <div class="folder-content">
+          <div class="folder-name" data-scramble>Projects</div>
+          <div class="folder-desc">Major projects, group works, system developments, and final deliverables.</div>
+        </div>
+        <div class="folder-right"><span class="folder-status">6 files</span><div class="folder-arrow"><i data-lucide="arrow-right"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact reveal" id="contactSection">
+    <div class="contact-decor-1"></div>
+    <div class="contact-decor-2"></div>
+    <div class="contact-decor-3"></div>
+    <div class="contact-inner">
+      <div class="contact-icon-wrap" data-hover data-sound="hover"><i data-lucide="mail"></i></div>
+      <h2 class="contact-heading">For work, collabs &<br>everything else, reach me at</h2>
+      <p class="contact-sub">I'd love to hear from you. Whether it's a project idea,<br>a question, or just a hello — my inbox is always open.</p>
+      <div class="contact-emails">
+        <div class="contact-email-row">
+          <span class="contact-email-label">PCU Mail</span>
+          <span class="contact-email-divider"></span>
+          <a href="mailto:arocarlos@pcu.edu.ph" class="contact-email-link" data-hover data-sound="hover">arocarlos@pcu.edu.ph<span class="link-arrow"><i data-lucide="arrow-up-right"></i></span></a>
+          <button class="contact-copy-btn" data-copy="arocarlos@pcu.edu.ph" data-hover data-sound="click" title="Copy email"><i data-lucide="copy"></i></button>
+        </div>
+        <div class="contact-email-row">
+          <span class="contact-email-label">Personal</span>
+          <span class="contact-email-divider"></span>
+          <a href="mailto:arrilrj.carlos@gmail.com" class="contact-email-link" data-hover data-sound="hover">arrilrj.carlos@gmail.com<span class="link-arrow"><i data-lucide="arrow-up-right"></i></span></a>
+          <button class="contact-copy-btn" data-copy="arrilrj.carlos@gmail.com" data-hover data-sound="click" title="Copy email"><i data-lucide="copy"></i></button>
+        </div>
+      </div>
+      <div class="contact-socials">
+        <a href="mailto:arocarlos@pcu.edu.ph" class="contact-social-btn" data-hover data-sound="hover" title="Email"><i data-lucide="mail"></i></a>
+        <a href="mailto:arrilrj.carlos@gmail.com" class="contact-social-btn" data-hover data-sound="hover" title="Gmail"><i data-lucide="send"></i></a>
+        <a href="https://calcunieli.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-social-btn" data-hover data-sound="hover" title="Website"><i data-lucide="globe"></i></a>
+      </div>
+      <div class="contact-bottom-line">Philippine Christian University - Dasmarinas — BSIT 3B</div>
+    </div>
+  </section>
+
+  <div class="folder-preview" id="previewPanel">
+    <div class="preview-icon-box"><i data-lucide="folder"></i></div>
+    <div class="preview-label">Folder Preview</div>
+    <div class="preview-name" id="previewName">—</div>
+    <div class="preview-files" id="previewFiles">0 files compiled</div>
+  </div>
+
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button class="lightbox-close" id="lightboxClose" data-hover><i data-lucide="x"></i></button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" data-hover><i data-lucide="chevron-left"></i></button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" data-hover><i data-lucide="chevron-right"></i></button>
+    <div class="lightbox-img-wrap" id="lightboxImgWrap">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter">01 / 06</div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent">
+      <button class="modal-close" id="modalClose" data-hover><i data-lucide="x"></i></button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="backToTop" data-hover data-sound="click">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <footer>
+    <div class="footer-col">
+      © 2026 Arril Ricajane O. Carlos<br>
+      Philippine Christian University - Dasmarinas
+    </div>
+    <div class="footer-col right">
+      Crafted with care<br>
+      BSIT 3B — Portfolio Compilation
+    </div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
 </html>
