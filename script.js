@@ -187,12 +187,9 @@ const lightboxPrev = $("#lightboxPrev");
 const lightboxNext = $("#lightboxNext");
 const modalClose = $("#modalClose");
 
-// lightboxMode: 'gallery' (main page gallery), 'modal-gallery' (multiple
-// images inside a folder modal, prev/next cycles within that folder),
-// or 'standalone' (a single modal image — arrows hidden).
 let lightboxMode = "gallery";
-let currentImageIndex = 0; // used by 'gallery' mode -> indexes galleryItems
-let modalGalleryImages = []; // used by 'modal-gallery' / 'standalone' -> [{img, name}]
+let currentImageIndex = 0;
+let modalGalleryImages = [];
 let modalGalleryIndex = 0;
 
 galleryItems.forEach((item, i) => {
@@ -226,9 +223,6 @@ function showLightboxArrows(show) {
   lightboxNext.classList[method]("hidden-nav");
 }
 
-// Opens the lightbox for a set of images that belong to one modal folder.
-// images: [{img, name}], startIndex: which one was clicked.
-// Automatically becomes 'standalone' (arrows hidden) when there's only one image.
 function openModalGalleryLightbox(images, startIndex) {
   lightboxMode = images.length > 1 ? "modal-gallery" : "standalone";
   modalGalleryImages = images;
@@ -336,7 +330,7 @@ const folderData = {
   },
   laboratory: {
     name: "Laboratory",
-    files: 2,
+    files: 3,
     projects: [
       {
         name: "VM SETUP: UBUNTU INSTALLATION",
@@ -353,6 +347,13 @@ const folderData = {
         tag: "Laboratory",
         pdf: true,
         link: "https://drive.google.com/file/d/1HemXkwY64wFxBd8ptjLzFx-j8taI2Zem/preview",
+      },
+      {
+        name: "LAB ACTIVITY 3",
+        desc: "Physical Netwrok Configuration.",
+        img: "https://drive.google.com/thumbnail?id=1yiwAXTWwxiKmKgRH6oTCM2CsHASoqV_o&sz=w1920",
+        tag: "Laboratory",
+        lightbox: true,
       },
     ],
   },
@@ -433,7 +434,7 @@ $$(".folder-item").forEach((item) => {
       const singleClass =
         data.projects.length === 1 ? " modal-projects-single" : "";
       html += `<div class="modal-projects${singleClass}">`;
-      let lightboxCounter = -1; // position of each lightbox-enabled project within this folder's gallery
+      let lightboxCounter = -1;
       data.projects.forEach((p) => {
         const isClickable = p.live || p.pdf || p.lightbox;
         const liveBadge = p.live
