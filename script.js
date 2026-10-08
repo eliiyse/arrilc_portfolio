@@ -304,7 +304,7 @@ const folderData = {
         link: "https://drive.google.com/file/d/1HY374w0XZdd6mXpzjWMMT0b3zBigYMq8/preview",
       },
       {
-        name: "QUIZ 4 - CLOUD COMPUTING NETWORKING QUIZ",
+        name: "QUIZ 4",
         desc: "Online assessment / 22/25 (88%) on cloud computing and networking, with zero violations.",
         img: "https://drive.google.com/thumbnail?id=11tyTQCYiFoo7jiuZQtcEv38hmrC_1Lci&sz=w1920",
         tag: "Online Quiz",
