@@ -276,7 +276,7 @@ lightboxNext.addEventListener("click", () => {
 const folderData = {
   quiz: {
     name: "Quiz",
-    files: 4,
+    files: 5,
     projects: [
       {
         name: "QUIZ 1",
@@ -302,6 +302,13 @@ const folderData = {
         pdf: true,
         lightbox: true,
         link: "https://drive.google.com/file/d/1HY374w0XZdd6mXpzjWMMT0b3zBigYMq8/preview",
+      },
+      {
+        name: "QUIZ 4 - CLOUD COMPUTING NETWORKING QUIZ",
+        desc: "Online assessment / 22/25 (88%) on cloud computing and networking, with zero violations.",
+        img: "https://drive.google.com/thumbnail?id=11tyTQCYiFoo7jiuZQtcEv38hmrC_1Lci&sz=w1920",
+        tag: "Online Quiz",
+        lightbox: true,
       },
       {
         name: "LONG QUIZ",
