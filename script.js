@@ -333,7 +333,7 @@ const folderData = {
       },
       {
         name: "QUIZ 5",
-        desc: "Perfect score (30/30) on Virtual Network Features and Networking.",
+        desc: "Fifth quiz — latest assessment compiled for the semester.",
         img: "https://drive.google.com/thumbnail?id=1hMU9H3TzbL2v2kPFTM5wDU-e-Paa9Mgv&sz=w1920",
         tag: "Online Quiz",
         lightbox: true,
@@ -442,6 +442,7 @@ const folderData = {
         tag: "Web App",
         live: true,
         link: "https://comsoc-pcud.infinityfreeapp.com/",
+        external: true,
       },
     ],
   },
@@ -650,6 +651,10 @@ function openPreview(name) {
     .flatMap((f) => f.projects)
     .find((x) => x.name === name);
   if (!p) return;
+  if (p.external) {
+    window.open(p.link, "_blank", "noopener");
+    return;
+  }
   pvUrl = p.link;
   $("#pvTitle").textContent = p.name;
   $("#pvOpen").href = p.link;
@@ -727,7 +732,7 @@ function renderShowcase() {
       ) => `<button class="sc-card" data-name="${p.name}" data-hover data-sound="hover">
         <span class="sc-img"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.closest('.sc-card').classList.add('img-fail')" />${p.live ? '<span class="sc-live"><span class="live-dot"></span>Live</span>' : ""}</span>
         <span class="sc-body"><span class="sc-tag">${p.tag}</span><span class="sc-name">${p.name}</span><span class="sc-desc">${p.desc}</span>
-        <span class="sc-cta">${p.live ? "Open preview" : "View image"}<i data-lucide="arrow-up-right"></i></span></span></button>`,
+        <span class="sc-cta">${p.external ? "Visit site" : p.live ? "Open preview" : "View image"}<i data-lucide="arrow-up-right"></i></span></span></button>`,
     )
     .join("");
   lucide.createIcons();
