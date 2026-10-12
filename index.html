@@ -90,6 +90,56 @@
           >
             Invert
           </button>
+          <div class="theme-picker" id="themePicker">
+            <button
+              class="theme-btn"
+              id="themeBtn"
+              aria-label="Choose color theme"
+              aria-expanded="false"
+              aria-haspopup="true"
+              data-hover
+              title="Color theme"
+            >
+              <i data-lucide="palette"></i>
+            </button>
+            <div class="theme-menu" id="themeMenu" role="menu">
+              <button
+                class="theme-swatch"
+                data-theme="rose"
+                role="menuitem"
+                aria-label="Rose"
+                title="Rose"
+              ></button>
+              <button
+                class="theme-swatch"
+                data-theme="ocean"
+                role="menuitem"
+                aria-label="Ocean"
+                title="Ocean"
+              ></button>
+              <button
+                class="theme-swatch"
+                data-theme="mint"
+                role="menuitem"
+                aria-label="Mint"
+                title="Mint"
+              ></button>
+              <button
+                class="theme-swatch"
+                data-theme="sunset"
+                role="menuitem"
+                aria-label="Sunset"
+                title="Sunset"
+              ></button>
+              <button
+                class="theme-swatch"
+                data-theme="lavender"
+                role="menuitem"
+                aria-label="Lavender"
+                title="Lavender"
+              ></button>
+            </div>
+          </div>
           <button
             class="sound-toggle"
             id="soundToggle"
@@ -155,10 +205,6 @@
             />
             <div class="hero-photo-frame"></div>
           </div>
-        </div>
-        <div class="scroll-indicator">
-          <span class="scroll-indicator-text">Scroll</span>
-          <div class="scroll-indicator-line"></div>
         </div>
       </section>
 
