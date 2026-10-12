@@ -594,25 +594,70 @@ $("#about").addEventListener("mousemove", (e) => {
 });
 
 const themeMeta = document.querySelector('meta[name="theme-color"]');
+const THEMES = {
+  rose: ["#f8f4f6", "#221a2b"],
+  ocean: ["#f3f7fa", "#14212c"],
+  mint: ["#f3f8f4", "#15241b"],
+  sunset: ["#fbf5ef", "#2a1e17"],
+  lavender: ["#f6f4fb", "#1e1a33"],
+};
+let currentPalette = "rose";
 function applyTheme(dark) {
   document.body.classList.toggle("inverted", dark);
-  if (themeMeta) themeMeta.content = dark ? "#221a2b" : "#f8f4f6";
+  if (themeMeta) themeMeta.content = THEMES[currentPalette][dark ? 1 : 0];
 }
-let savedTheme = null;
+function applyPalette(name) {
+  if (!THEMES[name]) name = "rose";
+  currentPalette = name;
+  Object.keys(THEMES).forEach((k) =>
+    document.body.classList.toggle("theme-" + k, k === name),
+  );
+  $$(".theme-swatch").forEach((b) =>
+    b.classList.toggle("active", b.dataset.theme === name),
+  );
+  applyTheme(document.body.classList.contains("inverted"));
+}
+let savedTheme = null,
+  savedPalette = null;
 try {
   savedTheme = localStorage.getItem("theme");
+  savedPalette = localStorage.getItem("palette");
 } catch (e) {}
-applyTheme(
+document.body.classList.toggle(
+  "inverted",
   savedTheme
     ? savedTheme === "dark"
     : matchMedia("(prefers-color-scheme: dark)").matches,
 );
+applyPalette(savedPalette);
 $("#invertBtn").addEventListener("click", () => {
   const dark = !document.body.classList.contains("inverted");
   applyTheme(dark);
   try {
     localStorage.setItem("theme", dark ? "dark" : "light");
   } catch (e) {}
+});
+const themeBtn = $("#themeBtn"),
+  themeMenu = $("#themeMenu");
+function setThemeMenu(open) {
+  themeMenu.classList.toggle("open", open);
+  themeBtn.setAttribute("aria-expanded", open);
+}
+themeBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  setThemeMenu(!themeMenu.classList.contains("open"));
+});
+themeMenu.addEventListener("click", (e) => {
+  const sw = e.target.closest(".theme-swatch");
+  if (!sw) return;
+  applyPalette(sw.dataset.theme);
+  try {
+    localStorage.setItem("palette", sw.dataset.theme);
+  } catch (e) {}
+  setThemeMenu(false);
+});
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#themePicker")) setThemeMenu(false);
 });
 
 const menuBtn = $("#menuBtn"),
@@ -692,6 +737,7 @@ document.addEventListener("keydown", (e) => {
   else if (pvOverlay.classList.contains("active")) closePreview();
   else if (modalOverlay.classList.contains("active"))
     modalOverlay.classList.remove("active");
+  else if (themeMenu.classList.contains("open")) setThemeMenu(false);
   else setMenu(false);
 });
 const palette = $("#palette");
@@ -1930,7 +1976,7 @@ const INTENTS = [
     kw: ["dark", "light", "theme", "invert", "mode"],
     run: () =>
       R(
-        "Use the Invert button in the top bar (or press T) to switch themes. Your choice is remembered.",
+        "Use the Invert button in the top bar (or press T) for dark mode, and the palette button to pick a color theme: Rose, Ocean, Mint, Sunset or Lavender. Your choices are remembered.",
         [{ label: "Switch theme", fn: () => $("#invertBtn").click() }],
         ["Shortcuts", "Sound"],
       ),
