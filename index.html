@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio of Arril Ricajane O. Carlos, BSIT 3B — quizzes, exams, lab work and projects."
+    />
+    <meta name="theme-color" content="#f8f4f6" />
     <title>Arril Ricajane O. Carlos — Portfolio</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
@@ -61,6 +66,9 @@
           <a href="#about" class="nav-link active" data-hover data-sound="hover"
             >ABOUT</a
           >
+          <a href="#showcase" class="nav-link" data-hover data-sound="hover"
+            >PROJECTS</a
+          >
           <a href="#archive" class="nav-link" data-hover data-sound="hover"
             >ARCHIVE</a
           >
@@ -91,8 +99,23 @@
             <i data-lucide="volume-2" class="icon-unmuted"></i>
             <i data-lucide="volume-x" class="icon-muted"></i>
           </button>
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <i data-lucide="menu"></i>
+          </button>
         </div>
       </nav>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">About</a>
+        <a href="#showcase">Projects</a>
+        <a href="#archive">Archive</a>
+        <a href="#contactSection">Contact</a>
+      </div>
 
       <section class="hero" id="about">
         <div class="hero-decor-circle"></div>
@@ -271,6 +294,20 @@
         </div>
       </section>
 
+      <section class="showcase" id="showcase">
+        <div class="section-header reveal">
+          <h2 class="section-title">Featured Projects</h2>
+          <span class="section-count" id="showcaseCount"></span>
+        </div>
+        <div
+          class="chips"
+          id="chips"
+          role="tablist"
+          aria-label="Filter projects"
+        ></div>
+        <div class="showcase-grid" id="showcaseGrid"></div>
+      </section>
+
       <section class="portfolio" id="archive">
         <div class="section-header reveal">
           <h2 class="section-title">Portfolio Folders</h2>
@@ -292,7 +329,7 @@
               </div>
             </div>
             <div class="folder-right">
-              <span class="folder-status">5 files</span>
+              <span class="folder-status">6 files</span>
               <div class="folder-arrow"><i data-lucide="arrow-right"></i></div>
             </div>
           </div>
@@ -349,7 +386,7 @@
               </div>
             </div>
             <div class="folder-right">
-              <span class="folder-status">6 files</span>
+              <span class="folder-status">7 files</span>
               <div class="folder-arrow"><i data-lucide="arrow-right"></i></div>
             </div>
           </div>
@@ -415,6 +452,36 @@
               </button>
             </div>
           </div>
+          <form class="contact-form" id="contactForm">
+            <input
+              name="name"
+              placeholder="Your name"
+              aria-label="Your name"
+              required
+            />
+            <input
+              name="email"
+              type="email"
+              placeholder="Your email"
+              aria-label="Your email"
+              required
+            />
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Write your message"
+              aria-label="Message"
+              required
+            ></textarea>
+            <button
+              type="submit"
+              class="contact-send"
+              data-hover
+              data-sound="click"
+            >
+              Send message
+            </button>
+          </form>
           <div class="contact-socials">
             <a
               href="mailto:arocarlos@pcu.edu.ph"
@@ -469,6 +536,15 @@
         <div class="lightbox-img-wrap" id="lightboxImgWrap">
           <img class="lightbox-img" id="lightboxImg" src="" alt="" />
         </div>
+        <a
+          class="lightbox-site"
+          id="lightboxSite"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          hidden
+          >Visit live site</a
+        >
         <div class="lightbox-counter" id="lightboxCounter">01 / 06</div>
       </div>
 
@@ -480,6 +556,112 @@
           <div id="modalBody"></div>
         </div>
       </div>
+
+      <div
+        class="preview-overlay"
+        id="previewOverlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Live preview"
+      >
+        <div class="preview-bar">
+          <div class="preview-title" id="pvTitle">Preview</div>
+          <div class="preview-actions">
+            <button class="pv-btn" id="pvDesktop" aria-label="Desktop view">
+              <i data-lucide="monitor"></i>
+            </button>
+            <button class="pv-btn" id="pvMobile" aria-label="Mobile view">
+              <i data-lucide="smartphone"></i>
+            </button>
+            <button class="pv-btn" id="pvReload" aria-label="Reload">
+              <i data-lucide="refresh-cw"></i>
+            </button>
+            <a
+              class="pv-btn"
+              id="pvOpen"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open in new tab"
+              ><i data-lucide="external-link"></i
+            ></a>
+            <button class="pv-btn" id="pvClose" aria-label="Close preview">
+              <i data-lucide="x"></i>
+            </button>
+          </div>
+        </div>
+        <div class="preview-stage" id="pvStage">
+          <div class="preview-loading" id="pvLoading">Loading preview…</div>
+          <iframe
+            id="pvFrame"
+            title="Project preview"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>
+        <div class="preview-hint">
+          Blank or blocked? Some sites don’t allow embedding. Use the
+          open-in-new-tab button.
+        </div>
+      </div>
+
+      <div
+        class="palette"
+        id="palette"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search portfolio"
+      >
+        <div class="pal-box">
+          <div class="pal-field">
+            <i data-lucide="search"></i
+            ><input
+              id="palInput"
+              type="text"
+              placeholder="Search quizzes, labs, projects…"
+              autocomplete="off"
+              aria-label="Search"
+            /><kbd>Esc</kbd>
+          </div>
+          <ul class="pal-list" id="palList" role="listbox"></ul>
+        </div>
+      </div>
+
+      <button
+        class="chat-btn"
+        id="chatBtn"
+        aria-label="Chat with Eli"
+        aria-expanded="false"
+        data-hover
+      >
+        <span class="eli-wrap" data-eli></span>
+      </button>
+      <div class="eli-bubble" id="eliBubble" hidden>
+        Hi, I'm Eli! 👋 Ask me anything about Arril or this portfolio.
+      </div>
+      <section class="chat" id="chat" aria-label="Chat with Eli">
+        <header class="chat-head">
+          <span class="chat-avatar" data-eli></span>
+          <div>
+            <strong>Eli</strong
+            ><span class="chat-status"><i></i>Online · happy to help</span>
+          </div>
+          <button id="chatClose" aria-label="Close chat">
+            <i data-lucide="x"></i>
+          </button>
+        </header>
+        <div class="chat-log" id="chatLog" aria-live="polite"></div>
+        <div class="chat-chips" id="chatChips"></div>
+        <form class="chat-form" id="chatForm">
+          <input
+            id="chatInput"
+            placeholder="Ask about Arril, projects, skills…"
+            autocomplete="off"
+            aria-label="Message"
+          /><button type="submit" aria-label="Send">
+            <i data-lucide="send"></i>
+          </button>
+        </form>
+      </section>
 
       <button class="back-to-top" id="backToTop" data-hover data-sound="click">
         <i data-lucide="arrow-up"></i>
