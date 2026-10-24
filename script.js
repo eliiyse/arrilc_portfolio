@@ -288,7 +288,7 @@ const folderData = {
   quiz: {
     name: "Quiz",
     soon: "More quizzes coming soon...",
-    files: 6,
+    files: 7,
     projects: [
       {
         name: "QUIZ 1",
@@ -338,12 +338,19 @@ const folderData = {
         tag: "Online Quiz",
         lightbox: true,
       },
+      {
+        name: "MIDTERM LONG QUIZ",
+        desc: "Online assessment / 44/45 (98%) on cloud networking and virtualization, with zero violations.",
+        img: "images/midterm-long-quiz.png",
+        tag: "Online Quiz",
+        lightbox: true,
+      },
     ],
   },
   exams: {
     name: "Exams",
     soon: "More exams coming soon...",
-    files: 1,
+    files: 2,
     projects: [
       {
         name: "PRELIM EXAM",
@@ -352,6 +359,13 @@ const folderData = {
         tag: "Prelim",
         pdf: true,
         link: "https://drive.google.com/file/d/1k-q7sA8yj0htwLZp8SLV7VAw-R1XnXlH/preview",
+      },
+      {
+        name: "MIDTERM EXAM",
+        desc: "Cloud Computing midterm examination / 69/70 (99%) with zero violations.",
+        img: "images/midterm-exam.png",
+        tag: "Midterm",
+        lightbox: true,
       },
     ],
   },
@@ -441,7 +455,7 @@ const folderData = {
         img: "https://drive.google.com/thumbnail?id=1WLihNYSpx7HaXYn5NKE1PMTSn6vv1BUQ&sz=w1920",
         tag: "Web App",
         live: true,
-        link: "https://comsoc-pcud.infinityfreeapp.com/",
+        link: "https://coi-nnect.infinityfreeapp.com/",
         external: true,
       },
     ],
@@ -1064,6 +1078,8 @@ const ALIAS = {
   "LAB ACTIVITY 2": ["lab activity 2", "lab 2"],
   "LAB ACTIVITY 3": ["lab activity 3", "lab 3", "physical network"],
   "PRELIM EXAM": ["prelim"],
+  "MIDTERM EXAM": ["midterm exam", "midterm"],
+  "MIDTERM LONG QUIZ": ["midterm long quiz", "midterm quiz"],
   "LONG QUIZ": ["long quiz"],
   "QUIZ 1": ["quiz 1", "quiz one"],
   "QUIZ 2": ["quiz 2", "quiz two"],
@@ -1876,7 +1892,7 @@ const INTENTS = [
     kw: ["quizzes", "quiz"],
     run: () =>
       R(
-        `The Quiz folder has ${folderData.quiz.files} files, including a perfect 20/20 on Quiz 1 and 22/25 (88%) on Quiz 4, plus a long quiz.`,
+        `The Quiz folder has ${folderData.quiz.files} files, including a perfect 20/20 on Quiz 1, 22/25 (88%) on Quiz 4, a long quiz, and a 44/45 (98%) on the Midterm Long Quiz.`,
         [actFolder("quiz")],
         ["Highlights", "Exams", "Labs"],
       ),
@@ -1885,7 +1901,7 @@ const INTENTS = [
     kw: ["exam", "exams", "midterm", "finals"],
     run: () =>
       R(
-        "The Exams folder holds the Prelim Exam as a PDF.",
+        "The Exams folder holds the Prelim Exam as a PDF and the Midterm Exam result, a 69/70 (99%) in Cloud Computing, as an image.",
         [actFolder("exams")],
         ["Quizzes", "Labs"],
       ),
