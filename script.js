@@ -782,9 +782,15 @@ layers.forEach((o) =>
 const allProjects = Object.values(folderData).flatMap((f) => f.projects);
 const chipsEl = $("#chips"),
   gridEl = $("#showcaseGrid");
-const featured = folderData.projects.projects.filter(
-  (p) => p.name !== "CALCUNIELI",
-);
+// Only these show in "Featured Projects" (the Projects folder still holds all of them)
+const FEATURED_NAMES = [
+  "BLOOMING INTERACTIVE FLOWER",
+  "TTPD STORYTELLING",
+  "CAVITE RUSH",
+];
+const featured = FEATURED_NAMES.map((n) =>
+  folderData.projects.projects.find((p) => p.name === n),
+).filter(Boolean);
 let activeChip = "All";
 
 function renderShowcase() {
@@ -2476,3 +2482,376 @@ if (!nudged) {
 }
 
 lucide.createIcons();
+
+/* ─────────────────────────────────────────────────────────────
+   Name FX — "task tracker" hop effect for the hero name.
+   A box hops letter to letter, the letter inside turns into a
+   dashed outline, a status pill pops up, and dashed arrows trail
+   behind. Purely decorative: it never changes the real text.
+   To remove it: delete this file's <script> tag in index.html.
+   ───────────────────────────────────────────────────────────── */
+(function () {
+  "use strict";
+
+  var h1 = document.querySelector(".hero-name");
+  if (!h1) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var HOP_MS = 120; // box travel time per hop while chasing the mouse (fast)
+  var CALM_MS = 340; // box travel time per hop when it runs by itself (gentle)
+  var MAX_ARCS = 14;
+  var live = [];
+  var uid = 0;
+
+  /* ── pill labels: all taken from this portfolio ── */
+  var DOT = '<circle cx="5" cy="5" r="3.3" fill="currentColor"/>';
+  function tag(label, dark) { return { key: dark ? "dark" : "light", label: label, icon: DOT }; }
+  var STATES = [
+    tag("Hi, I'm Arril"), // always the first one
+    tag("BSIT 3B"),
+    tag("Ad emendationem", true),
+    tag("Cloud Computing"),
+    tag("TouchDesigner"),
+    tag("Computer Vision"),
+    tag("Web Projects"),
+    tag("Cavite Rush · Live"),
+    tag("Ubuntu · VirtualBox"),
+    tag("MySQL"),
+    tag("Git & GitHub", true),
+    tag("69/70 Midterm"),
+    tag("20/20 Quiz 1")
+  ];
+
+  var HAND =
+    '<svg viewBox="0 0 24 24" width="22" height="22" fill="var(--bg)" stroke="var(--text)" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">' +
+    '<path d="M9 11V5.2a1.7 1.7 0 0 1 3.4 0V10"/>' +
+    '<path d="M12.4 10V4.2a1.7 1.7 0 0 1 3.4 0V10.5"/>' +
+    '<path d="M15.8 10.5V6a1.6 1.6 0 0 1 3.2 0v7.2c0 4-2.4 7.3-6.4 7.3h-1.2c-2.2 0-3.6-1-4.9-2.7L4 14.6a1.6 1.6 0 0 1 2.5-2L9 15"/>' +
+    "</svg>";
+
+  /* ── overlay DOM (lives beside the .line spans, so their overflow:hidden can't clip it) ── */
+  var fx = document.createElement("span");
+  fx.className = "hn-fx";
+  fx.setAttribute("aria-hidden", "true");
+  fx.innerHTML =
+    '<svg class="hn-trail" xmlns="' + SVGNS + '"><defs>' +
+    '<marker id="hnArrow" viewBox="0 0 10 10" refX="8.2" refY="5" markerWidth="7.5" markerHeight="7.5" markerUnits="userSpaceOnUse" orient="auto">' +
+    '<path d="M1.6 1.6 8.4 5 1.6 8.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>' +
+    '<g class="hn-masks"></g></defs><g class="hn-arcs"></g></svg>' +
+    '<span class="hn-box"><svg class="hn-glyph" xmlns="' + SVGNS + '"><text></text></svg></span>' +
+    '<span class="hn-pill"><span class="hn-pill-in"><svg class="hn-ico" viewBox="0 0 10 10" width="10" height="10"></svg><span class="hn-lab"></span></span></span>' +
+    '<span class="hn-hand">' + HAND + "</span>";
+  h1.appendChild(fx);
+
+  var trail = fx.querySelector(".hn-trail");
+  var masks = fx.querySelector(".hn-masks");
+  var arcs = fx.querySelector(".hn-arcs");
+  var box = fx.querySelector(".hn-box");
+  var glyph = fx.querySelector(".hn-glyph");
+  var glyphText = glyph.querySelector("text");
+  var pill = fx.querySelector(".hn-pill");
+  var ico = fx.querySelector(".hn-ico");
+  var lab = fx.querySelector(".hn-lab");
+  var hand = fx.querySelector(".hn-hand");
+  var ctx = document.createElement("canvas").getContext("2d");
+
+  /* ── letters of the name (skips spaces and punctuation) ── */
+  function collect() {
+    var out = [];
+    var walker = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        return fx.contains(n) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var n;
+    while ((n = walker.nextNode())) {
+      var t = n.nodeValue;
+      for (var i = 0; i < t.length; i++) {
+        if (/[A-Za-z0-9\u00C0-\u024F]/.test(t[i])) out.push({ node: n, i: i, ch: t[i] });
+      }
+    }
+    return out;
+  }
+
+  /* ── geometry of one letter, relative to the h1 ── */
+  function geom(L) {
+    var r = document.createRange();
+    r.setStart(L.node, L.i);
+    r.setEnd(L.node, L.i + 1);
+    var rc = r.getBoundingClientRect();
+    var hb = h1.getBoundingClientRect();
+    var el = L.node.parentNode;
+    var cs = getComputedStyle(el);
+    var fs = parseFloat(cs.fontSize);
+    ctx.font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+    var m = ctx.measureText(L.ch);
+    var asc = m.fontBoundingBoxAscent != null ? m.fontBoundingBoxAscent : fs * 0.95;
+    var ox = rc.left - hb.left;
+    var base = rc.top - hb.top + asc;
+    var pad = Math.max(5, fs * 0.075);
+    var gl = ox - m.actualBoundingBoxLeft;
+    var gr = ox + m.actualBoundingBoxRight;
+    var gt = base - m.actualBoundingBoxAscent;
+    var gb = base + m.actualBoundingBoxDescent;
+    var w = Math.max(gr - gl + pad * 2, fs * 0.42);
+    var cx = (gl + gr) / 2;
+    return {
+      x: cx - w / 2,
+      y: gt - pad,
+      w: w,
+      h: gb - gt + pad * 2,
+      ox: ox,
+      base: base,
+      ch: L.ch,
+      r: Math.max(6, fs * 0.12),
+      font: { family: cs.fontFamily, size: cs.fontSize, weight: cs.fontWeight, style: cs.fontStyle }
+    };
+  }
+
+  function instant(fn) {
+    fx.classList.add("hn-instant");
+    fn();
+    void fx.offsetWidth;
+    fx.classList.remove("hn-instant");
+  }
+
+  function place(g) {
+    box.style.width = g.w + "px";
+    box.style.height = g.h + "px";
+    box.style.borderRadius = g.r + "px";
+    box.style.transform = "translate(" + g.x + "px," + g.y + "px)";
+    glyph.setAttribute("width", g.w);
+    glyph.setAttribute("height", g.h);
+    glyphText.textContent = g.ch;
+    glyphText.setAttribute("x", g.ox - g.x - 2); // 2px = box border
+    glyphText.setAttribute("y", g.base - g.y - 2);
+    glyphText.style.fontFamily = g.font.family;
+    glyphText.style.fontSize = g.font.size;
+    glyphText.style.fontWeight = g.font.weight;
+    glyphText.style.fontStyle = g.font.style;
+    hand.style.transform = "translate(" + (g.x + g.w - 7) + "px," + (g.y + g.h - 9) + "px)";
+  }
+
+  /* ── dashed arrow arcing from one stop to the next ── */
+  function arc(a, b, calm) {
+    var x1 = a.x + a.w / 2, y1 = a.y - 3;
+    var x2 = b.x + b.w / 2, y2 = b.y - 5;
+    var dist = Math.hypot(x2 - x1, y2 - y1);
+    var lift = Math.min(56, Math.max(16, dist * 0.42));
+    var d = "M" + x1 + " " + y1 + " Q" + (x1 + x2) / 2 + " " + (Math.min(y1, y2) - lift) + " " + x2 + " " + y2;
+    var id = "hnm" + uid++;
+    var hb = h1.getBoundingClientRect();
+
+    var mask = document.createElementNS(SVGNS, "mask");
+    mask.setAttribute("id", id);
+    mask.setAttribute("maskUnits", "userSpaceOnUse");
+    mask.setAttribute("x", -200);
+    mask.setAttribute("y", -200);
+    mask.setAttribute("width", hb.width + 400);
+    mask.setAttribute("height", hb.height + 400);
+    var reveal = document.createElementNS(SVGNS, "path");
+    reveal.setAttribute("d", d);
+    reveal.setAttribute("class", "hn-draw" + (calm ? " calm" : ""));
+    mask.appendChild(reveal);
+    masks.appendChild(mask);
+
+    var p = document.createElementNS(SVGNS, "path");
+    p.setAttribute("d", d);
+    p.setAttribute("class", "hn-arc" + (calm ? " calm" : ""));
+    p.setAttribute("marker-end", "url(#hnArrow)");
+    p.setAttribute("mask", "url(#" + id + ")");
+    arcs.appendChild(p);
+
+    var len = reveal.getTotalLength();
+    reveal.style.strokeDasharray = len + " " + len;
+    reveal.style.strokeDashoffset = len;
+    void reveal.getBoundingClientRect();
+    reveal.classList.add("go");
+
+    var item = { p: p, mask: mask };
+    live.push(item);
+    function drop() {
+      if (p.parentNode) p.parentNode.removeChild(p);
+      if (mask.parentNode) mask.parentNode.removeChild(mask);
+    }
+    setTimeout(drop, calm ? 4200 : 1900);
+    if (live.length > MAX_ARCS) {
+      var old = live.shift();
+      if (old.p.parentNode) old.p.parentNode.removeChild(old.p);
+      if (old.mask.parentNode) old.mask.parentNode.removeChild(old.mask);
+    }
+  }
+
+  /* ── status pill ── */
+  var lastState = null;
+  function showPill(g, st) {
+    lastState = st;
+    lab.textContent = typeof st.label === "function" ? st.label() : st.label;
+    ico.innerHTML = st.icon;
+    pill.className = "hn-pill is-" + st.key;
+    var pw = pill.offsetWidth, ph = pill.offsetHeight;
+    var maxLeft = h1.offsetWidth - pw + 6;
+    var left = Math.min(maxLeft, Math.max(-6, g.x + g.w / 2 - pw / 2));
+    pill.style.transform = "translate(" + left + "px," + (g.y - ph - 8) + "px)";
+    void pill.offsetWidth;
+    pill.classList.add("show");
+  }
+  function hidePill() {
+    pill.classList.remove("show");
+  }
+
+  /* ── helpers ── */
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  var queue = [];
+  function nextState() {
+    if (!queue.length) queue = shuffle(STATES.slice(1));
+    return queue.pop();
+  }
+
+  var onScreen = true;
+  function canRun() { return onScreen && !document.hidden; }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (e) {
+      onScreen = e[0].isIntersecting;
+    }, { threshold: 0.15 }).observe(h1);
+  }
+
+  /* ── state ── */
+  var hero = h1.closest(".hero") || h1;
+  var letters = [];
+  var boxes = [];
+  var idx = 0;
+  var prev = null;
+  var ready = false;
+  var inHero = false;
+  var target = -1;
+  var lastMove = 0;
+  var lastHop = 0;
+  var autoNext = 0;
+  var hopsLeft = 3;
+  var pillTimer = 0;
+
+  function refresh() {
+    boxes = letters.map(geom);
+    trail.style.width = h1.offsetWidth + "px";
+  }
+
+  function hop(i, fast) {
+    fx.style.setProperty("--hn-dur", (fast ? HOP_MS : CALM_MS) + "ms");
+    fx.classList.toggle("hn-calm", !fast);
+    var g = geom(letters[i]);
+    boxes[i] = g;
+    place(g);
+    if (prev && i !== idx) arc(prev, g, !fast);
+    prev = g;
+    idx = i;
+    lastHop = performance.now();
+    hidePill();
+    clearTimeout(pillTimer);
+    pillTimer = setTimeout(function () { showPill(prev, nextState()); }, 170);
+  }
+
+  /* ── mouse / touch: chase the letter nearest the pointer ── */
+  function onPointer(e) {
+    var hr = hero.getBoundingClientRect();
+    inHero = e.clientX >= hr.left && e.clientX <= hr.right && e.clientY >= hr.top && e.clientY <= hr.bottom;
+    if (!inHero || !boxes.length) return;
+    var hb = h1.getBoundingClientRect();
+    var px = e.clientX - hb.left, py = e.clientY - hb.top;
+    var best = -1, bd = Infinity;
+    for (var i = 0; i < boxes.length; i++) {
+      var b = boxes[i];
+      var dx = Math.max(b.x - px, 0, px - (b.x + b.w));
+      var dy = Math.max(b.y - py, 0, py - (b.y + b.h));
+      var d = dx * dx + dy * dy;
+      if (d < bd) { bd = d; best = i; }
+    }
+    target = best;
+    lastMove = performance.now();
+  }
+  document.addEventListener("pointermove", onPointer, { passive: true });
+  document.addEventListener("pointerdown", onPointer, { passive: true });
+  document.documentElement.addEventListener("pointerleave", function () { inHero = false; });
+
+  /* ── the loop: never stops. Mouse in control when active, otherwise it runs itself ── */
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!ready || !canRun()) return;
+    var pointerActive = inHero && now - lastMove < 1400;
+    if (pointerActive) {
+      if (target >= 0 && target !== idx && now - lastHop >= 55) hop(target, true);
+      autoNext = now + 1200;
+    } else if (now >= autoNext) {
+      var r = Math.random();
+      var ni = idx + (r < 0.12 ? 2 : 1);
+      if (ni >= letters.length) ni = 0; // wrap around, no fade, no pause
+      if (ni < 0) ni = 0;
+      hop(ni, false);
+      hopsLeft--;
+      if (hopsLeft > 0) {
+        autoNext = now + 520;
+      } else {
+        hopsLeft = 1 + Math.floor(Math.random() * 3);
+        autoNext = now + 1900;
+      }
+    }
+  }
+
+  function init() {
+    letters = collect();
+    if (!letters.length) { fx.parentNode.removeChild(fx); return; }
+    refresh();
+    idx = 0;
+    prev = boxes[0];
+    instant(function () { place(prev); });
+    fx.classList.add("on");
+    autoNext = performance.now() + 1500;
+    pillTimer = setTimeout(function () { showPill(prev, STATES[0]); }, 500); // starts "Done"
+    ready = true;
+    requestAnimationFrame(frame);
+  }
+
+  /* keep the box glued to its letter when the layout changes */
+  var rz;
+  window.addEventListener("resize", function () {
+    clearTimeout(rz);
+    rz = setTimeout(function () {
+      if (!ready) return;
+      refresh();
+      prev = boxes[idx];
+      instant(function () {
+        place(prev);
+        if (pill.classList.contains("show") && lastState) showPill(prev, lastState);
+      });
+    }, 150);
+  });
+
+  /* ── start once the page loader is gone and fonts are in ── */
+  function start() {
+    var go = function () {
+      (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
+        setTimeout(function () {
+          try { init(); } catch (e) { if (fx.parentNode) fx.parentNode.removeChild(fx); }
+        }, 400);
+      });
+    };
+    var ov = document.getElementById("loaderOverlay");
+    if (!ov || ov.classList.contains("gone") || ov.classList.contains("exit")) return go();
+    var mo = new MutationObserver(function () {
+      if (ov.classList.contains("exit") || ov.classList.contains("gone")) {
+        mo.disconnect();
+        setTimeout(go, 900);
+      }
+    });
+    mo.observe(ov, { attributes: true, attributeFilter: ["class"] });
+  }
+  start();
+})();
