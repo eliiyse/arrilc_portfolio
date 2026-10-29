@@ -402,7 +402,7 @@ const folderData = {
   projects: {
     name: "Projects",
     soon: "More projects coming soon...",
-    files: 7,
+    files: 8,
     projects: [
       {
         name: "BLOOMING INTERACTIVE FLOWER",
@@ -456,6 +456,15 @@ const folderData = {
         tag: "Web App",
         live: true,
         link: "https://coi-nnect.infinityfreeapp.com/",
+        external: true,
+      },
+      {
+        name: "CAVITE RUSH",
+        desc: "Web game / a 3D first-person motorcycle booking game set in Cavite, with pickups, drop-offs, a live map, garage upgrades and a photo mode.",
+        img: "images/cavite-rush.jpg",
+        tag: "Web App",
+        live: true,
+        link: "https://cavite-rush.vercel.app/",
         external: true,
       },
     ],
@@ -979,7 +988,7 @@ const PROFILE = {
   skills: {
     Databases: "MySQL for storing and querying data",
     "Web development":
-      "front-end web apps such as Calcunieli, Pomodoro, TTPD Storytelling and the COMSOC PCUD site",
+      "front-end web apps such as Calcunieli, Pomodoro, TTPD Storytelling, the COMSOC PCUD site and the Cavite Rush 3D game",
     "Interactive media":
       "TouchDesigner pieces like Blooming Interactive Flower and Wispy Particles",
     "Computer vision":
@@ -1060,7 +1069,7 @@ const facts = [
   "Quiz 4 scored 22/25 (88%) on cloud computing and networking, with zero violations.",
   "The lab setup runs Ubuntu on VirtualBox with 4GB RAM, 4 CPU cores and a 100GB dynamic disk.",
   "The TouchDesigner pieces react to hand tracking in real time.",
-  "Four of the web projects are live online, hosted on Vercel, GitHub Pages and InfinityFree.",
+  "Five of the web projects are live online, hosted on Vercel, GitHub Pages and InfinityFree.",
   "This portfolio has a hidden search: press Ctrl+K or the / key.",
 ];
 let jokeI = 0,
@@ -1074,6 +1083,7 @@ const ALIAS = {
   POMODORO: ["pomodoro", "focus timer", "timer"],
   "TTPD STORYTELLING": ["ttpd", "storytelling"],
   "COMSOC PCUD": ["comsoc", "computer society"],
+  "CAVITE RUSH": ["cavite rush", "cavite", "motorcycle", "driving game"],
   "VM SETUP: UBUNTU INSTALLATION": ["ubuntu", "virtualbox", "vm setup", "vm"],
   "LAB ACTIVITY 2": ["lab activity 2", "lab 2"],
   "LAB ACTIVITY 3": ["lab activity 3", "lab 3", "physical network"],
